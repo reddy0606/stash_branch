@@ -1,0 +1,42 @@
+Thanks for sharing the error log. Here's a breakdown of what's happening and how you can fix it:
+
+🔍 Error Summary:
+AssertionError: /src/bigtop/main/build/.python3/nutanix/nutanix_catalog_pc_client-1.0.0-py3-none-any.whl not found
+
+This error is raised because the script expected a .whl (Python wheel) file at a specific path, but it wasn't found. The assertion failed in this line:
+Pythonassert src_list, "%s not found" % os.path.join(self.__top_dir, src_wcard)``Show more lines
+
+✅ What You Can Check:
+
+
+Verify the File Exists
+Check if the file nutanix_catalog_pc_client-1.0.0-py3-none-any.whl exists at:
+/src/bigtop/main/build/.python3/nutanix/
+
+
+
+Check Build Process
+Ensure that the .whl file is being built correctly before this step. It might be missing due to:
+
+A failed build of the nutanix_catalog_pc_client package.
+Incorrect build configuration or missing dependencies.
+
+
+
+Check File Naming or Versioning
+If the version or filename has changed (e.g., 1.0.1 instead of 1.0.0), update the script or config to match the correct filename.
+
+
+Check .gitignore or Cleanup Scripts
+Sometimes .whl files are accidentally excluded or deleted during cleanup. Make sure nothing is removing it prematurely.
+
+
+
+🛠️ Suggested Fix:
+If the .whl file is missing, rebuild it manually using:
+Shellcd /path/to/nutanix_catalog_pc_clientpython3 setup.py bdist_wheel``Show more lines
+Then ensure it gets copied to the expected location:
+/src/bigtop/main/build/.python3/nutanix/
+
+
+Would you like help writing a script to automate this check or rebuild process? Or do you want to inspect the make_package.py logic further?
